@@ -1,33 +1,32 @@
 def temperature_tracker():
-    # Initialise variables to store calculations [5, 6]
+    # Initialise variables to store calculations 
     total_temperature = 0.0
     day_count = 0
 
-    # Initialise highest_temperature to a very low integer value and lowest_temperature to a very high integer value
-    # as requested, instead of 'infinity'. This ensures they are correctly updated by the first actual temperature [7, 8].
-    # Using a range that far exceeds expected real-world temperatures for robust initialisation.
+    # Initialise highest_temperature to a very low integer value and lowest_temperature to a very high integer value.
     highest_temperature = -1_000_000  # A sufficiently low integer
     lowest_temperature = 1_000_000   # A sufficiently high integer
 
     increased_days_count = 0
-    previous_day_temperature = None  # To keep track of the temperature from the preceding day [7, 8]
+    previous_day_temperature = None  # To keep track of the temperature from the preceding day 
 
-    file_name = "hk-temperatures-2024.txt" # The specified input file [1, 3]
+    file_name = "hk-temperatures-2024.txt" # Opening the text file
 
     try:
-        # Open the temperature file for reading. The 'with' statement ensures the file is closed automatically [7, 8].
+        # Open the temperature file read only. The 'with' statement ensures the file is closed automatically.
         with open(file_name, 'r') as file:
-            # Loop through each line in the file, where each line contains a daily temperature reading [6, 9]
+            # Loop through each line in the file, as each line contains a daily temperature reading.
             for line in file:
                 try:
                     # Remove any leading/trailing whitespace (like newline characters) and convert the string
-                    # to a float, as temperatures can have decimal points [7, 8].
+                    # to a float.
                     current_temperature = float(line.strip())
 
                     total_temperature += current_temperature
+                    # running total of total temperatue
                     day_count += 1
 
-                    # Use selection structures (if statements) to identify the highest and lowest temperatures [6, 9]
+                    # Use selection structures (if statements) to identify the highest and lowest temperatures
                     if current_temperature > highest_temperature:
                         highest_temperature = current_temperature
 
