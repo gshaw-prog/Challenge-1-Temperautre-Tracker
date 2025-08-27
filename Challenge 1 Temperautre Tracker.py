@@ -23,7 +23,7 @@ def temperature_tracker():
                     current_temperature = float(line.strip())
 
                     total_temperature += current_temperature
-                    # running total of total temperatue
+                    # running total of total temperatue to be used to calculate average
                     day_count += 1
 
                     # Use selection structures (if statements) to identify the highest and lowest temperatures
@@ -34,21 +34,21 @@ def temperature_tracker():
                         lowest_temperature = current_temperature
 
                     # Compare with the previous day's temperature to count increases.
-                    # This comparison is skipped for the very first day's reading [7, 8].
+                    # This comparison is skipped for the very first day's reading 
                     if previous_day_temperature is not None:
                         if current_temperature > previous_day_temperature:
                             increased_days_count += 1
 
-                    # Update the previous day's temperature for the next iteration of the loop [7, 8]
+                    # Update the previous day's temperature for the next iteration of the loop
                     previous_day_temperature = current_temperature
 
                 except ValueError:
-                    # Implement exception handling for non-numeric data in the file to prevent crashes [6, 9]
+                    # Implement exception handling for non-numeric data in the file to prevent crashes
                     print(f"Warning: Skipping non-numeric data found in file: '{line.strip()}'")
                     continue  # Move to the next line in the file
 
     except FileNotFoundError:
-        # Implement exception handling for cases where the input file does not exist [6, 9]
+        # Implement exception handling for cases where the input file does not exist 
         print(f"Error: The temperature file '{file_name}' was not found. Please ensure it is in the correct directory.")
         # Return default values (0 for all statistics) if the file cannot be processed
         return 0, 0, 0, 0
@@ -62,29 +62,13 @@ def temperature_tracker():
         highest_temperature = 0.0
         lowest_temperature = 0.0
 
-    # Round all calculated temperature values to the nearest integer as required [2, 4]
+    # Round all calculated temperature values to the nearest integer
     rounded_average_temperature = round(average_temperature)
     rounded_highest_temperature = round(highest_temperature)
     rounded_lowest_temperature = round(lowest_temperature)
 
-    # The function must return 4 integers: average, highest, lowest, and count of increased days [2, 4]
+    # The function must return 4 integers: average, highest, lowest, and count of increased days
     return rounded_average_temperature, rounded_highest_temperature, rounded_lowest_temperature, increased_days_count
-
-# --- Example Usage (for testing the function) ---
-# To test, create a file named 'hk-temperatures-2024.txt' in the same directory as your Python script
-# with content like this:
-# 25.5
-# 26.1
-# 24.0
-# 27.8
-# 27.8
-# 28.5
-# 23.9
-# 25.0
-# 26.0
-# invalid_data
-# 27.0
-# 26.5
 
 avg_temp, high_temp, low_temp, days_increased = temperature_tracker()
 print(f"Average Temperature (rounded): {avg_temp}°C")
